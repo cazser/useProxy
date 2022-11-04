@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import useProxy from './useProxy';
 const Test = ()=>{
-  const [count, setCount] = useState(0);
- const onClick = ()=>{setCount(count+1)}
+ let count = useProxy( useState(0));
+ const onClick = ()=>{count = (count+1);}
   return (
      <div>
-      <div>{count}</div>
+      <div>{count.value}</div>
       <button onClick={onClick} >+1</button>
      </div>
      )
