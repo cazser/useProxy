@@ -2,7 +2,7 @@ import { useState } from 'react';
 import useProxy from './useProxy';
 const Test = ()=>{
  let count = useProxy( useState(0));
- const onClick = ()=>{ }
+ const onClick = ()=>{ count.value+=1 }
   return (
      <div>
       <div>{count.value}</div>
