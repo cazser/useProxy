@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useProxy from './useProxy';
 const Test = ()=>{
- let count = useProxy( useState(0));
+ let count = useProxy( 0 );
  const onClick = ()=>{ count.value+=1 }
   return (
      <div>

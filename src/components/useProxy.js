@@ -1,8 +1,9 @@
 import { useState } from 'react'
 
-const useProxy = (target)=>{
+const useProxy = (arg)=>{
 //proxy只能拦截对象
 //console.log(typeof target);
+const target = useState(arg);
 const state =  target[0];
 const setState= target[1];
   return new Proxy(target, {
@@ -17,6 +18,8 @@ const setState= target[1];
     set:(target, prop, val)=>{
       if(prop==='value'){
         setState(val);  
+      }else{
+      
       }
     }
     
