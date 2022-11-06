@@ -6,24 +6,42 @@ const useProxy = (arg)=>{
 const target = useState(arg);
 const state =  target[0];
 const setState= target[1];
-  return new Proxy(target, {
-    get:(target, prop)=>{
-      console.log(prop);
-      if(prop==='value'){
-        return state;
-      }else{
-        return target[prop]
-      }
-    },
-    set:(target, prop, val)=>{
-      if(prop==='value'){
-        setState(val);  
-      }else{
-      
-      }
+if(typeof state!=='object'){
+    return new Proxy(target, {
+      get:(target, prop)=>{
+        console.log(prop);
+        if(prop==='value'){
+          return state;
+        }else{
+          return target[prop]
+        }
+      },
+      set:(target, prop, val)=>{
+        if(prop==='value'){
+          setState(val);  
+        }else{
+          
+        }
     }
     
   });
+}else{
+   return new Proxy(target, {
+      get:(target, prop)=>{
+        return state[prop];  
+      },
+      set:(target, prop, val)=>{
+        console.log(target);
+        setState(
+            {
+              ...state,
+              [prop]:val
+            }
+          )
+      }
+    
+  });
+}
 }
 
 export default useProxy;
