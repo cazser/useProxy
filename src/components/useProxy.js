@@ -22,6 +22,7 @@ if(typeof state!=='object'){
         }else{
           
         }
+        return true;
     }
     
   });
@@ -38,6 +39,7 @@ if(typeof state!=='object'){
               [prop]:val
             }
           )
+        return true;
       }
     
   });
