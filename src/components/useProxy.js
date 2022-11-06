@@ -9,7 +9,7 @@ const setState= target[1];
 if(typeof state!=='object'){
     return new Proxy(target, {
       get:(target, prop)=>{
-        console.log(prop);
+        //console.log(prop);
         if(prop==='value'){
           return state;
         }else{
@@ -31,7 +31,7 @@ if(typeof state!=='object'){
         return state[prop];  
       },
       set:(target, prop, val)=>{
-        console.log(target);
+        //console.log(target);
         setState(
             {
               ...state,
