@@ -28,8 +28,9 @@ if(typeof state!=='object'){
   });
 }else{
    return new Proxy(target, {
-      get:(target, prop)=>{
-        return state[prop];  
+      get:(target, prop, receiver)=>{
+        
+        return state[prop];
       },
       set:(target, prop, val)=>{
         //console.log(target);
