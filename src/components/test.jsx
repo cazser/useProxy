@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import useProxy from './useProxy';
 const Test = ()=>{
- let count = useProxy( {age:19, name:"静静", education:{primary:"xxx小学"}} );
+ const array = useProxy( [1,2,3,4,5] );
  const onClick = ()=>{ 
-   count.age = count.age+1;
-   count.education.primary =  count.age;
+   array[0]++;
  }
+  array.push(0);
 
   return (
      <div>
-      <div>{count.age}</div>
-      <div>{count.name}</div>
-     <div>{count.education.primary}</div>
+      <div>{array[0]}</div>
+      <div>{array[1]}</div>
+      <div>{array[2]}</div>
       <button onClick={onClick} >+1</button>
      </div>
      )
