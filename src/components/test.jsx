@@ -2,11 +2,15 @@ import { useState } from 'react';
 import useProxy from './useProxy';
 
 const Test = ()=>{
- const person = useProxy({age:18, name:"Tom", education:{primary: "xxx小学", value:{some:1}}})
+ const person = useProxy({age:18, name:"Tom",
+ func:function(){
+  console.log(this.name)
+ }, education:{primary: "xxx小学", value:{some:1}}})
 const onClick =()=>{
   person.age++;
   person.education.primary = person.age;
   person.education.value.some++;
+  person.func();
 }
 return (
      <div>

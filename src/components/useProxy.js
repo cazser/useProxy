@@ -43,7 +43,7 @@ if(typeof state!=='object'){
         set(target, prop, val) { // 拦截写入操作
           //target[prop]=val;
          // setState({...target}) 
-          console.log(target);
+         // console.log(target);
           if(Array.isArray(state)){
             target[prop]=val;
             setState([...target])
