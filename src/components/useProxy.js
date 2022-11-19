@@ -7,7 +7,8 @@ const target = useState(arg);
 const state =  target[0];
 const setState= target[1];
 if(typeof state!=='object'){
-    return new Proxy(target, {
+  //非对象  
+  return new Proxy(target, {
       get:(target, prop)=>{
         //console.log(prop);
         if(prop==='value'){
@@ -27,10 +28,11 @@ if(typeof state!=='object'){
     
   });
 }else{
-   return new Proxy(target, {
+  //对象
+   return new Proxy(state, {
       get:(target, prop, receiver)=>{
         
-        return state[prop];
+        return Reflect.get(target, prop, receiver);
       },
       set:(target, prop, val)=>{
         //console.log(target);

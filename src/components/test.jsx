@@ -7,7 +7,7 @@ const Test = ()=>{
  }
 //
 
-array.push(18);
+//array.push(18);
 const count = useProxy({age:18, name:"Tom", education:{"primary":"xxx小学"}})
 const onclick1 = ()=>{
   count.age++;
