@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+
 const useProxy = (arg)=>{
 //proxy只能拦截对象
 //console.log(typeof target);
@@ -35,12 +36,11 @@ if(typeof state!=='object'){
            if (prop in target) {
            return target[prop];
          } else {
-           return 0; // 默认值
+           return undefined; // 默认值
          }
         },
         set(target, prop, val) { // 拦截写入操作
-          target[prop]=val;
-          setState({ ...target})   
+          target[prop]=val;   
           return true;
         
       },
