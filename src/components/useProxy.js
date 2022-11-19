@@ -30,23 +30,45 @@ if(typeof state!=='object'){
 }else{
   //对象
    return new Proxy(state, {
-      get:(target, prop, receiver)=>{
+     
+         get:(target, prop)=> {
+           if (prop in target) {
+           return target[prop];
+         } else {
+           return 0; // 默认值
+         }
+        },
+        set(target, prop, val) { // 拦截写入操作
+          target[prop]=val;
+          setState({ ...target})   
+          return true;
         
-        return Reflect.get(target, prop, receiver);
       },
-      set:(target, prop, val)=>{
-        //console.log(target);
-        setState(
-            {
-              ...state,
-              [prop]:val
-            }
-          )
-        return true;
+       ownKeys(target) {
+      return Object.keys(target);
+    },
+     getOwnPropertyDescriptor(target, prop) { // 被每个属性调用
+     return {
+      enumerable: true,
+      configurable: true
+      /* 其他属性，类似于 "value:..." */
+      };
       },
+      deleteProperty(target, prop) { // 拦截属性删除
+    
+        delete target[prop];
+          return true;
+    
+      },
+
+      has(target, prop) {
+        return prop in target;
+    },
+    apply(target, thisArg, args) {
+       target.apply(thisArg, args);
+    }
+
       
-  
-  
   });
 }
 }

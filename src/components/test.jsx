@@ -6,8 +6,11 @@ const Test = ()=>{
    array[0]++;
  }
 //
+for(let num of array){
+  console.log(num);
+}
 
-//array.push(18);
+Object.getPrototypeOf(array).push;
 const count = useProxy({age:18, name:"Tom", education:{"primary":"xxx小学"}})
 const onclick1 = ()=>{
   count.age++;
@@ -15,12 +18,9 @@ const onclick1 = ()=>{
 } 
 return (
      <div>
-      <div>
-        <div>{array[0]}</div>
-        <div>{array[1]}</div>
-        <div>{array[2]}</div>
-        <div>{array[3]}</div>
-      </div>
+      <ol>
+        {array.map(item=><li>{item}</li> ) }
+      </ol>
       <button onClick={onClick} >+1</button>
       <div>{count.age}</div>
       <div>{count.education.primary}</div>
