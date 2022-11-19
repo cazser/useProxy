@@ -2,15 +2,18 @@ import { useState } from 'react';
 import useProxy from './useProxy';
 
 const Test = ()=>{
- const array = useProxy([{value:1},{value:2}]);
+ const person = useProxy({age:18, name:"Tom", education:{primary: "xxx小学", value:{some:1}}})
 const onClick =()=>{
-  array[0].value++;
+  person.age++;
+  person.education.primary = person.age;
+  person.education.value.some++;
 }
 return (
      <div>
-      <ol>
-        {array.map((item, index)=><li key={index}>{item.value}</li> ) }
-      </ol>
+     <div>{person.age}</div>
+     <div>{person.name}</div>
+     <div>{person.education.primary}</div>     
+    <div>{person.education.value.some}</div>
       <button onClick={onClick}>+1</button>   
      </div>
      )
