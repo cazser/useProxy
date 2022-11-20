@@ -5,12 +5,11 @@ import './index.css'
 import createProxyForObject from './lib/useProxy/createProxyForObject';
 
 
-const object = createProxyForObject({a:{b:{c:1}}}, ()=>{
-  console.log("aaaa")
+const array = createProxyForObject([[1,2], [3,4]], ()=>{
+  console.log("bingle")
 })
 
-object.a.b={op:11}
-console.log(object)
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
