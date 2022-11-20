@@ -9,7 +9,8 @@ const object = createProxyForObject({a:{b:{c:1}}}, ()=>{
   console.log("aaaa")
 })
 
-object.a.b.c = 12;
+object.a.b={op:11}
+console.log(object)
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
