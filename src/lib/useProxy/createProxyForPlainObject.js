@@ -8,6 +8,7 @@ const createProxyForPlainObject=(target, effect)=>{
           return target[key];
       },
       set:(target, prop, val)=> { // 拦截写入操作
+        target[prop] = val;
          effect(target);
           return true;
   
