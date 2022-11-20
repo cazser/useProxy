@@ -32,10 +32,12 @@ if(typeof state!=='object'){
   //对象
    return new Proxy(state, {
      
-         get:(target, prop)=> {
-          //console.log(target)
-           if (prop in target) {
-           return target[prop];
+         get:function(target, prop, receiver) {
+          if(prop in target){
+           let value = Reflect.get(...arguments);
+           console.log(value);
+           console.log(typeof value ==='function')
+           return typeof value == 'function' ? value.bind(target) : value;
          } else {
            return undefined; // 默认值
          }
@@ -44,7 +46,10 @@ if(typeof state!=='object'){
           //target[prop]=val;
          // setState({...target}) 
           console.log(target);
-          if(Array.isArray(state)){
+          if(target instanceof Set){
+            console.log('set')
+            setState(new Set(target))
+          }else if(Array.isArray(state)){
             target[prop]=val;
             setState([...target])
           }else{
@@ -59,11 +64,7 @@ if(typeof state!=='object'){
       return Object.keys(target);
     },
      getOwnPropertyDescriptor(target, prop) { // 被每个属性调用
-     return {
-      enumerable: true,
-      configurable: true
-      /* 其他属性，类似于 "value:..." */
-      };
+     return Object.getOwnPropertyDescriptor(target,prop);
       },
       deleteProperty(target, prop) { // 拦截属性删除
     

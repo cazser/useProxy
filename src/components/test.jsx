@@ -2,18 +2,17 @@ import { useState } from 'react';
 import useProxy from './useProxy';
 
 const Test = ()=>{
- const person = useProxy({age:18, name:"Tom", education:{primary: "xxx小学", value:{some:1}}})
+
+const data = useProxy(new Set([1,2,3,4]))
 const onClick =()=>{
-  person.age++;
-  person.education.primary = person.age;
-  person.education.value.some++;
+    data.add(Math.random());
+    console.log(data);
 }
 return (
      <div>
-     <div>{person.age}</div>
-     <div>{person.name}</div>
-     <div>{person.education.primary}</div>     
-    <div>{person.education.value.some}</div>
+      <ol>
+        {Array.from(data).map((item, index)=><li key={index}>{item}</li>)}
+      </ol>
       <button onClick={onClick}>+1</button>   
      </div>
      )
