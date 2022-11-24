@@ -30,33 +30,21 @@ if(typeof state!=='object'){
   });
 }else{
   //对象
+  let  serial = JSON.stringify(state);
    return new Proxy(state, {
      
          get:function(target, prop, receiver) {
-          if(prop in target){
-           let value = Reflect.get(...arguments);
-           console.log(value);
-           console.log(typeof value ==='function')
-           return typeof value == 'function' ? value.bind(target) : value;
-         } else {
-           return undefined; // 默认值
-         }
+             if(prop in target){
+              return target[prop];
+             }  
+
+             return undefined;
         },
         set(target, prop, val) { // 拦截写入操作
-          //target[prop]=val;
-         // setState({...target}) 
-          console.log(target);
-          if(target instanceof Set){
-            console.log('set')
-            setState(new Set(target))
-          }else if(Array.isArray(state)){
-            target[prop]=val;
-            setState([...target])
-          }else{
-            setState({
-            ...state,
-            [prop]:val
-          })}
+         
+          if(prop in target){
+            target[prop] = val;
+          }
           return true;
         
       },

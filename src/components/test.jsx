@@ -3,17 +3,21 @@ import useProxy from '../lib/useProxy/useProxy'
 
 const Test = ()=>{
 
-const data = useProxy(new Set([1,2,3,4]))
-const onClick =()=>{
-    data.add(Math.random());
-    console.log(data);
+const data = useProxy([[1,2,3], 
+                       [4,5,6],
+                       [7,8,9]])
+const onclick = ()=>{
+    data.push(Math.random());
 }
 return (
      <div>
       <ol>
-        {Array.from(data).map((item, index)=><li key={index}>{item}</li>)}
+        {data.map((item, index)=>
+        <ol key={index}>
+           {item.map((inner, innerindex)=><li key={innerindex}>{inner}</li>) }
+        </ol>)}
       </ol>
-      <button onClick={onClick}>+1</button>
+      <button onClick={onclick} >+1</button>
       </div>   
 )
 }
