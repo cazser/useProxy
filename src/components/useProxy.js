@@ -10,9 +10,11 @@ const useProxy = (obj)=>{
     const [state, setState] = useState(obj);
     return new Proxy(state,{
         get(target, key){
+          console.log(key);
           return target[key]
         },
         set(target, prop, newVal){
+          console.log(prop);
           target[prop] = newVal;
         }
     } )
